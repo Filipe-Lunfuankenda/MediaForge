@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Gradiente do Símbolo Terminal/Play (Ciano para Roxo) -->
+    <linearGradient id="playPromptGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00D2FF" />
+      <stop offset="100%" stop-color="#8B5CF6" />
+    </linearGradient>
+
+    <!-- Gradiente do Cursor (Roxo para Rosa) -->
+    <linearGradient id="cursorGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#EC4899" />
+    </linearGradient>
+
+    <!-- Gradiente da Inteligência Artificial (Ciano para Roxo Claro) -->
+    <linearGradient id="aiSparkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00D2FF" />
+      <stop offset="100%" stop-color="#A78BFA" />
+    </linearGradient>
+  </defs>
+
+  <g>
+    <!-- O Símbolo '>' (Terminal Prompt / Play Button) -->
+    <path d="M 55 65 L 105 105 L 55 145" 
+          fill="none" 
+          stroke="url(#playPromptGrad)" 
+          stroke-width="22" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" />
+
+    <!-- O Símbolo '_' (Cursor do Terminal a executar o código FFmpeg) -->
+    <path d="M 115 145 L 145 145" 
+          fill="none" 
+          stroke="url(#cursorGrad)" 
+          stroke-width="22" 
+          stroke-linecap="round" />
+
+    <!-- A Centelha da IA -->
+    <polygon points="135,45 139,57 151,57 141,65 145,77 135,70 125,77 129,65 119,57 131,57" 
+             fill="url(#aiSparkGrad)" />
+  </g>
+</svg>
