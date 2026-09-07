@@ -22,15 +22,24 @@ test.describe('MediaForge E2E Tests', () => {
     await expect(page.locator('textarea')).toBeVisible();
   });
 
-  test('Interação Básica do Chat', async ({ page }) => {
+  test('Interação do Chat - Múltiplos Idiomas e Erros', async ({ page }) => {
     await page.goto('/');
     
     const chatInput = page.locator('textarea');
+    
+    // Teste 1: Português
     await chatInput.fill('Extrair audio deste video para mp3');
     await chatInput.press('Enter');
-
-    // Como o Llama está mockado ou demora muito no CI, 
-    // verificamos apenas se a mensagem do utilizador apareceu na UI.
     await expect(page.locator('text=Extrair audio deste video para mp3')).toBeVisible();
+
+    // Teste 2: Inglês
+    await chatInput.fill('Extract audio from test_video.mp4');
+    await chatInput.press('Enter');
+    await expect(page.locator('text=Extract audio from test_video.mp4')).toBeVisible();
+
+    // Teste 3: Espanhol com erros propositados
+    await chatInput.fill('Cnvierte isso pr mp3 por faavor d test_video.mp4');
+    await chatInput.press('Enter');
+    await expect(page.locator('text=Cnvierte isso pr mp3 por faavor d test_video.mp4')).toBeVisible();
   });
 });
