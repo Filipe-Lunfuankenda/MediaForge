@@ -8,7 +8,8 @@ pub async fn ask_local_ai(
 ) -> Result<String, String> {
     let resource_dir = app.path().resource_dir().map_err(|e| e.to_string())?;
     let model_path = resource_dir.join("models").join("model.gguf");
-    let exe_path = resource_dir.join("bin").join("llama-cli.exe");
+    let exe_name = if cfg!(windows) { "llama-cli.exe" } else { "llama-cli" };
+    let exe_path = resource_dir.join("bin").join(exe_name);
     
     // This connects to the llama-cli (llama.cpp engine)
     let output = app.shell()

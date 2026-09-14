@@ -114,7 +114,21 @@ export function ChatPanel() {
     
     try {
       const fullPrompt = `${prompt}. Os ficheiros alvo são: ${files.join(", ")}.`;
-      const aiResponse: string = await invoke("ask_local_ai", { prompt: fullPrompt });
+      let aiResponse: string;
+
+      if (typeof window !== "undefined" && !(window as any).__TAURI_INTERNALS__) {
+        // Modo web / simulação para testes e interface de desenvolvimento
+        const lower = prompt.toLowerCase();
+        if (lower.includes("audio") || lower.includes("mp3") || lower.includes("áudio")) {
+          aiResponse = `Vou extrair o fluxo de áudio para o formato MP3 preservando a qualidade.\nCOMANDO: ffmpeg -i input.mp4 -vn -c:a libmp3lame -q:a 2 output.mp3`;
+        } else if (lower.includes("cortar") || lower.includes("cut") || lower.includes("trim")) {
+          aiResponse = `Vou cortar o vídeo conforme as instruções fornecidas.\nCOMANDO: ffmpeg -ss 00:00:05 -i input.mp4 -c copy output.mp4`;
+        } else {
+          aiResponse = `Entendi a sua instrução e preparei o plano de execução.\nCOMANDO: ffmpeg -i input.mp4 -c:v libx264 -crf 23 output.mp4`;
+        }
+      } else {
+        aiResponse = await invoke("ask_local_ai", { prompt: fullPrompt });
+      }
       
       let plan: Plan | undefined = undefined;
       const cleanResponse = aiResponse.replace(fullPrompt, "").trim();

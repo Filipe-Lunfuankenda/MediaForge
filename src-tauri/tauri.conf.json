@@ -28,13 +28,11 @@
     "targets": "all",
     "externalBin": [
       "bin/ffmpeg",
-      "bin/ffprobe",
-      "bin/ffplay"
+      "bin/ffprobe"
     ],
     "resources": [
       "models/*",
-      "bin/llama-cli.exe",
-      "bin/*.dll"
+      "bin/*"
     ],
     "icon": [
       "icons/32x32.png",
