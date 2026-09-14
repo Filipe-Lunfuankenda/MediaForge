@@ -19,13 +19,13 @@ test.describe('MediaForge E2E Tests', () => {
     }
     
     // UI ainda deve estar responsiva (o chat box existe)
-    await expect(page.locator('textarea')).toBeVisible();
+    await expect(page.locator('textarea').first()).toBeVisible();
   });
 
   test('Interação do Chat - Múltiplos Idiomas e Erros', async ({ page }) => {
     await page.goto('/');
     
-    const chatInput = page.locator('textarea');
+    const chatInput = page.locator('textarea').first();
     
     // Teste 1: Português
     await chatInput.fill('Extrair audio deste video para mp3');
